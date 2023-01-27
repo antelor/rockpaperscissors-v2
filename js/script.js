@@ -1,5 +1,6 @@
 let playerScore = 0;
 let computerScore = 0;
+let round = 0
 
 function getComputerChoice() {
     let choices = ['rock', 'paper', 'scissors'];
@@ -13,7 +14,7 @@ function playRound(playerSelection){
     let computerSelection = getComputerChoice()
 
     if (playerSelection === computerSelection){
-        return 'Empate';
+        return 'tie';
     }
 
     if (playerSelection === 'rock'){
@@ -25,7 +26,7 @@ function playRound(playerSelection){
 
             case 'scissors':
             playerScore++;
-            return 'user';
+            return 'player';
             break;
         }
     }
@@ -33,7 +34,7 @@ function playRound(playerSelection){
         switch (computerSelection){
             case 'rock':
             playerScore++;
-            return 'user';
+            return 'player';
             break;
 
             case 'scissors':
@@ -46,7 +47,7 @@ function playRound(playerSelection){
         switch (computerSelection){
             case 'paper':
             playerScore++;
-            return 'user';
+            return 'player';
             break;
 
             case 'rock':
@@ -57,32 +58,63 @@ function playRound(playerSelection){
     }
 }
 
+function endGame() {
+    buttons.forEach((button) => {
+        button.removeEventListener("click", clickCallback);
+        button.innerText = "🔁";
+
+        if (playerScore > computerScore) {
+            document.querySelector('body').setAttribute('style', 'background-color: #00b20b;')
+        }
+        else {
+            document.querySelector('body').setAttribute('style', 'background-color: #b20000;')
+        }
+
+        button.addEventListener('click', () => {
+            reset();
+        });
+    })
+}
+
+function reset() {
+
+}
+
+//player score selector
+let playerScoreDOM = document.querySelectorAll(".playerGrid");
+
+//computer score selector
+let computerScoreDOM = document.querySelectorAll(".computerGrid");
+
 //button listeners
 let buttons = document.querySelectorAll(".selection");
-let results = document.querySelector(".results");
-let computerScoreElement = document.querySelector("#computerScore");
-let playerScoreElement = document.querySelector("#playerScore");
 
-buttons.forEach((button) => {  
-  button.addEventListener('click', () => {
-      let p = document.createElement('p');
-      p.textContent = playRound(button.id);
-      results.appendChild(p);
+function clickCallback(e) {
+    let roundResult = playRound(e.target.id);
+    console.log(roundResult)
 
-      computerScoreElement.textContent = computerScore;
-      playerScoreElement.textContent = playerScore;
+    if (roundResult === 'player') {
+        playerScoreDOM[round].textContent = "✅";
+        computerScoreDOM[round].textContent = "❌";
+    }
 
-      if (computerScore === 5) {
-        let p2 = document.createElement('h1');
-        p2.textContent = "gana pc";
-        results.appendChild(p2);
-      }
+    if (roundResult === 'pc') {
+        computerScoreDOM[round].textContent = "✅";
+        playerScoreDOM[round].textContent = "❌";
+    }
 
+    if (roundResult === 'tie') {
+        computerScoreDOM[round].textContent = "🙏";
+        playerScoreDOM[round].textContent = "🙏";
+    }
+    
+    round++;
 
-      if (playerScore === 5) {
-        let p2 = document.createElement('h1');
-        p2.textContent = "gana player";
-        results.appendChild(p2);
-      }
-  });
+    if (round === 5) {
+        endGame();
+    }
+}
+
+buttons.forEach((button) => {
+  button.addEventListener('click', clickCallback);
 });

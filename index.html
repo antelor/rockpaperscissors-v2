@@ -4,20 +4,40 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Piedrapapeltijera</title>
+    <title>Universal RPS</title>
     <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" href="css/styles.css">
     <script defer src="js/script.js"></script>
 </head>
 <body>
-    <button class="selection" id="rock">rock</button>
-    <button class="selection" id="paper">paper</button>
-    <button class="selection" id="scissors">scissors</button>
+    <div class="game">
+        <div class="name">
+            🪨📄✂️
+        </div>
 
-    <div id="computerScore">0</div>
-    <div id="playerScore">0</div>
-
-    <div class="results">
-
+        <div class="score">
+            <div class="playerScore">
+                <div class="playerGrid">⌛</div>
+                <div class="playerGrid">⌛</div>
+                <div class="playerGrid">⌛</div>
+                <div class="playerGrid">⌛</div>
+                <div class="playerGrid">⌛</div>
+            </div>
+            <div class="computerScore">
+                <div class="computerGrid">⌛</div>
+                <div class="computerGrid">⌛</div>
+                <div class="computerGrid">⌛</div>
+                <div class="computerGrid">⌛</div>
+                <div class="computerGrid">⌛</div>
+            </div>
+        </div>
+        
+        <div class="options">
+            <button class="selection" id="rock">🪨</button>
+            <button class="selection" id="paper">📄</button>
+            <button class="selection" id="scissors">✂️</button>
+        </div>
     </div>
+
 </body>
 </html>
