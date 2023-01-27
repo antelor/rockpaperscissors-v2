@@ -2,6 +2,35 @@ let playerScore = 0;
 let computerScore = 0;
 let round = 0
 
+function clickCallback(e) {
+    let roundResult = playRound(e.target.id);
+
+    if (roundResult === 'player') {
+        playerScoreDOM[round].textContent = "✅";
+        computerScoreDOM[round].textContent = "❌";
+    }
+
+    if (roundResult === 'pc') {
+        computerScoreDOM[round].textContent = "✅";
+        playerScoreDOM[round].textContent = "❌";
+    }
+
+    if (roundResult === 'tie') {
+        computerScoreDOM[round].textContent = "🙏";
+        playerScoreDOM[round].textContent = "🙏";
+    }
+    
+    round++;
+    console.log(round);
+    if (round === 5) {
+        endGame();
+    }
+}
+
+function resetCallback(e) {
+    reset();
+}
+
 function getComputerChoice() {
     let choices = ['rock', 'paper', 'scissors'];
 
@@ -70,13 +99,41 @@ function endGame() {
             document.querySelector('body').setAttribute('style', 'background-color: #b20000;')
         }
 
-        button.addEventListener('click', () => {
-            reset();
-        });
+        button.addEventListener('click', resetCallback);
     })
 }
 
 function reset() {
+    document.querySelector('body').setAttribute('style', 'background-color: #e5e5e5;')
+    
+    //reset button text
+    document.querySelector('#rock').innerText = "🪨";
+    document.querySelector('#paper').innerText = "📄";
+    document.querySelector('#scissors').innerText = "✂️";
+
+    //round & scores reset
+    round = 0;
+    playerScore = 0;
+    computerScore = 0;
+
+    //score table reset
+    for (let item of playerScoreDOM) {
+        item.innerText = '⌛';
+    }
+
+    for (let item of computerScoreDOM) {
+        item.innerText = '⌛';
+    }
+
+    //add button listener again
+    buttons.forEach((button) => {
+        button.removeEventListener('click', resetCallback);
+    });
+
+    buttons.forEach((button) => {
+        button.addEventListener('click', clickCallback);
+    });
+
 
 }
 
@@ -88,32 +145,6 @@ let computerScoreDOM = document.querySelectorAll(".computerGrid");
 
 //button listeners
 let buttons = document.querySelectorAll(".selection");
-
-function clickCallback(e) {
-    let roundResult = playRound(e.target.id);
-    console.log(roundResult)
-
-    if (roundResult === 'player') {
-        playerScoreDOM[round].textContent = "✅";
-        computerScoreDOM[round].textContent = "❌";
-    }
-
-    if (roundResult === 'pc') {
-        computerScoreDOM[round].textContent = "✅";
-        playerScoreDOM[round].textContent = "❌";
-    }
-
-    if (roundResult === 'tie') {
-        computerScoreDOM[round].textContent = "🙏";
-        playerScoreDOM[round].textContent = "🙏";
-    }
-    
-    round++;
-
-    if (round === 5) {
-        endGame();
-    }
-}
 
 buttons.forEach((button) => {
   button.addEventListener('click', clickCallback);
