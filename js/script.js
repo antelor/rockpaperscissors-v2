@@ -2,6 +2,7 @@ let playerScore = 0;
 let computerScore = 0;
 let round = 0
 
+//button functionality
 function clickCallback(e) {
     let roundResult = playRound(e.target.id);
 
@@ -27,10 +28,12 @@ function clickCallback(e) {
     }
 }
 
+//reset event callback
 function resetCallback(e) {
     reset();
 }
 
+//self explanatory
 function getComputerChoice() {
     let choices = ['rock', 'paper', 'scissors'];
 
@@ -39,6 +42,7 @@ function getComputerChoice() {
     return choices[choice];
 }
 
+//plays 1 round with player selection and computer generated choice, returns the winner
 function playRound(playerSelection){
     let computerSelection = getComputerChoice()
 
@@ -87,6 +91,7 @@ function playRound(playerSelection){
     }
 }
 
+//sets the game to the end state
 function endGame() {
     buttons.forEach((button) => {
         button.removeEventListener("click", clickCallback);
@@ -103,6 +108,7 @@ function endGame() {
     })
 }
 
+//resets everything 
 function reset() {
     document.querySelector('body').setAttribute('style', 'background-color: #e5e5e5;')
     
