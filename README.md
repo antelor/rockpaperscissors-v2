@@ -1,1 +1,3 @@
-# rockpaperscissors-v2
+# Universal RPS
+
+Live in https://antelor.github.io/rockpaperscissors-v2/
