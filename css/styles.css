@@ -81,3 +81,26 @@ button:active {
 	position:relative;
 	top:1px;
 }
+
+
+/*media queries*/
+@media (max-width:700px){
+	.name{
+		font-size: 70px;
+	}
+	.score{
+		display: flex;
+		flex-direction: row;
+		font-size: 50px;
+	}
+	.playerScore, .computerScore{
+		flex-direction: column;
+	}
+	.playerScore > div, .computerScore > div{
+		padding:5px;
+	}
+
+	button{
+		font-size:50px;
+	}
+}
